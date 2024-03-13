@@ -1,24 +1,13 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <nav>
-    <ul>
-      <li>
-        <a href="/">Home</a>
-      </li>
-      <li>
-        <a href="/call">Call</a>
-      </li>
-      <li>
-        <a href="/blog/create">blog</a>
-      </li>
-    </ul>
-  </nav>
-  <body>
-    <h1>OPPS something went went well 404</h1>
-  </body>
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="not-found content">
+    OOPS, page not found :)
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
 </html>

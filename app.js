@@ -1,54 +1,33 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
 
+// express app
 const app = express();
-const port = 3000;
 
-// Define the directory where your static files (like HTML, CSS, JS) are located
-// app.use(express.static(path.join(__dirname, "views")));
+// listen for requests
+app.listen(3000);
 
-// Register views engine
-app.set("view engine", "ejs");
+// register view engine
+app.set('view engine', 'ejs');
+// app.set('views', 'myviews');
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   const blogs = [
-    {
-      title: "Yoshi finds eggs",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-    {
-      title: "Yoshi finds eggs",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-    {
-      title: "Yoshi finds eggs",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-    {
-      title: "Yoshi finds eggs",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
+    {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
   ];
-  res.render("index", { title: "Welcome: from the server", blogs: blogs });
-});
-// Handle "/about" route
-app.get("/call", (req, res) => {
-  res.render("call"); // Render the "about.ejs" template
-});
-app.get("/blog/create", (req, res) => {
-  res.render("create"); // Render the "about.ejs" template
+  res.render('index', { title: 'Home', blogs });
 });
 
-// Redirect "/about-us" to "/about"
-// app.get("/about-us", (req, res) => {
-//   res.redirect("/about");
-// });
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
+});
 
-// Handle 404 errors
+app.get('/blogs/create', (req, res) => {
+  res.render('create', { title: 'Create a new blog' });
+});
+
+// 404 page
 app.use((req, res) => {
-  res.status(404).render("404"); // Render the "404.ejs" template for all other routes
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  res.status(404).render('404', { title: '404' });
 });

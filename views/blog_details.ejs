@@ -1,0 +1,38 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="about content">
+      <% blog.forEach(blogItem => { %>
+      <h3><%= blogItem.name %></h3>
+      <p><%= blogItem.snippet %></p>
+      <hr />
+      <p><%= blogItem.body %></p>
+
+      <button class="delete" data-doc="<%= blogItem.id %>">Delete</button>
+      <% }); %>
+    </div>
+
+    <script>
+      const deleteButtons = document.querySelectorAll(".delete");
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.doc;
+          const endpoint = `/blog/${id}`;
+          fetch(endpoint, {
+            method: "DELETE",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              window.location.href = data.redirect;
+              // Optionally handle success response, e.g., remove the deleted blog post from the UI
+            })
+            .catch((err) => console.error(err));
+        });
+      });
+    </script>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
